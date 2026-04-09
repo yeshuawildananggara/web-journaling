@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personal Growth Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;1,500&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="logo">ANONYM</div>
+        <ul class="nav-links">
+            <li class="active" data-target="daily">Today</li>
+            <li data-target="discovery">Knowing Myself</li>
+            <li data-target="finance">Money</li>
+            <li data-target="future">Future Plan</li>
+        </ul>
+    </nav>
+
+    <main class="content-wrapper">
+        <section id="daily" class="tab-content active">
+            <div class="header">
+                <span class="date-label" id="currentDate"></span>
+                <h1>Daily Intent & Reflection</h1>
+            </div>
+
+            <div class="grid-layout">
+                <div class="main-column">
+                    <div class="card">
+                        <h2>Diary</h2>
+                        <textarea id="diaryEntry" placeholder="How was your day? Write freely..."></textarea>
+                        <button class="btn-save" onclick="saveDiary()">Save Reflection</button>
+                    </div>
+                </div>
+
+                <div class="side-column">
+                    <div class="card">
+                        <h2>Daily Plan</h2>
+                        <div id="todoList">
+                            </div>
+                        <input type="text" id="newTask" placeholder="Add a plan...">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="finance" class="tab-content">
+            <div class="header">
+                <h1>Money Management</h1>
+            </div>
+            <div class="finance-grid">
+                <div class="card">
+                    <h3>Budget Overview</h3>
+                    <div class="balance-display">$<span id="totalBalance">0.00</span></div>
+                </div>
+                <div class="card">
+                    <h3>Add Transaction</h3>
+                    <input type="number" id="amount" placeholder="Amount">
+                    <input type="text" id="category" placeholder="Category (Food, Rent, etc.)">
+                    <button class="btn-save" onclick="addTransaction()">Add Entry</button>
+                </div>
+            </div>
+        </section>
+
+        <section id="discovery" class="tab-content">
+            <div class="header">
+                <h1>Knowing Myself</h1>
+            </div>
+            <div class="card discovery-card">
+                <h3 id="promptTitle">Prompt of the Moment</h3>
+                <p id="promptText">What is one thing you would do today if you weren't afraid?</p>
+                <textarea id="discoveryAnswer" placeholder="Reflect here..."></textarea>
+                <button class="btn-save">Save to My History</button>
+            </div>
+        </section>
+    </main>
+
+    <script src="app.js"></script>
+</body>
+</html>
