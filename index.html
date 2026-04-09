@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Personal Growth Dashboard</title>
+    <title>Anonym | Private Universe</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;1,500&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
 </head>
@@ -12,68 +12,70 @@
     <nav class="navbar">
         <div class="logo">ANONYM</div>
         <ul class="nav-links">
-            <li class="active" data-target="daily">Today</li>
-            <li data-target="discovery">Knowing Myself</li>
-            <li data-target="finance">Money</li>
-            <li data-target="future">Future Plan</li>
+            <li class="active" onclick="showSection('today')">Today</li>
+            <li onclick="showSection('finance')">Finance</li>
+            <li onclick="showSection('discovery')">Knowing Myself</li>
+            <li onclick="showSection('history')">History Data</li>
         </ul>
     </nav>
 
     <main class="content-wrapper">
-        <section id="daily" class="tab-content active">
+        <section id="today" class="tab-content active">
             <div class="header">
-                <span class="date-label" id="currentDate"></span>
-                <h1>Daily Intent & Reflection</h1>
+                <h1 id="currentDate">Daily Intent</h1>
+                <div class="productivity-container">
+                    <p>Productivity Level:</p>
+                    <div class="progress-bar"><div id="progressFill"></div></div>
+                </div>
             </div>
 
             <div class="grid-layout">
-                <div class="main-column">
-                    <div class="card">
-                        <h2>Diary</h2>
-                        <textarea id="diaryEntry" placeholder="How was your day? Write freely..."></textarea>
-                        <button class="btn-save" onclick="saveDiary()">Save Reflection</button>
+                <div class="card">
+                    <h2 class="serif">Daily Plans</h2>
+                    <div class="input-group">
+                        <input type="text" id="taskInput" placeholder="Add a new activity...">
+                        <button onclick="addTask()" class="btn-add">+</button>
                     </div>
+                    <ul id="taskList" class="list-container"></ul>
                 </div>
 
-                <div class="side-column">
-                    <div class="card">
-                        <h2>Daily Plan</h2>
-                        <div id="todoList">
-                            </div>
-                        <input type="text" id="newTask" placeholder="Add a plan...">
+                <div class="card">
+                    <h2 class="serif">Private Diary</h2>
+                    <div class="editor-toolbar">
+                        <button onclick="execCmd('bold')"><b>B</b></button>
+                        <button onclick="execCmd('italic')"><i>I</i></button>
+                        <select id="fontSize" onchange="execCmd('fontSize', this.value)">
+                            <option value="3">Size 1</option>
+                            <option value="4">Size 2</option>
+                            <option value="5">Size 3</option>
+                        </select>
+                        <input type="color" onchange="execCmd('foreColor', this.value)">
+                        <label for="imageUpload" class="btn-img">Add Image</label>
+                        <input type="file" id="imageUpload" hidden accept="image/*" onchange="handleImage(this)">
                     </div>
+                    <div id="diaryEditor" contenteditable="true" placeholder="Write your thoughts..."></div>
+                    <button class="btn-save" onclick="saveDiary()">Save Reflection</button>
                 </div>
             </div>
         </section>
 
         <section id="finance" class="tab-content">
-            <div class="header">
-                <h1>Money Management</h1>
-            </div>
-            <div class="finance-grid">
-                <div class="card">
-                    <h3>Budget Overview</h3>
-                    <div class="balance-display">$<span id="totalBalance">0.00</span></div>
+            <h1 class="serif">Money Management</h1>
+            <div class="card">
+                <div class="input-group">
+                    <input type="text" id="finNote" placeholder="Keterangan (e.g. Makan Siang)">
+                    <input type="number" id="finAmount" placeholder="Amount (e.g. 50000)">
+                    <button onclick="addFinance()" class="btn-add">Add Data</button>
                 </div>
-                <div class="card">
-                    <h3>Add Transaction</h3>
-                    <input type="number" id="amount" placeholder="Amount">
-                    <input type="text" id="category" placeholder="Category (Food, Rent, etc.)">
-                    <button class="btn-save" onclick="addTransaction()">Add Entry</button>
-                </div>
+                <div id="financeList" class="list-container"></div>
+                <div class="total-bar">Total: <span id="totalAmount">0</span></div>
             </div>
         </section>
 
-        <section id="discovery" class="tab-content">
-            <div class="header">
-                <h1>Knowing Myself</h1>
-            </div>
-            <div class="card discovery-card">
-                <h3 id="promptTitle">Prompt of the Moment</h3>
-                <p id="promptText">What is one thing you would do today if you weren't afraid?</p>
-                <textarea id="discoveryAnswer" placeholder="Reflect here..."></textarea>
-                <button class="btn-save">Save to My History</button>
-            </div>
+        <section id="history" class="tab-content">
+            <h1 class="serif">Archived Data</h1>
+            <div id="historyContainer" class="history-list">
+                </div>
         </section>
     </main>
 
